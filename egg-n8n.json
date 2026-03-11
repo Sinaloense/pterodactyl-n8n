@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-03-11T12:15:33-07:00",
+    "name": "n8n",
+    "author": "sinaloensemel@gmail.com",
+    "description": "n8n egg",
+    "features": [],
+    "docker_images": {
+        "n8n": "ghcr.io\/sinaloense\/pterodactyl-n8n:latest"
+    },
+    "file_denylist": [],
+    "startup": "n8n",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"n8n ready on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C & ^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# n8n Installation Script\r\n#",
+            "container": "debian:bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
