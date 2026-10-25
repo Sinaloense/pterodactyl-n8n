@@ -1,4 +1,6 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
+
+ARG N8N_VERSION=2.44.6
 
 LABEL maintainer="Manuel Martinez <sina@serverscstrike.com>"
 
@@ -12,7 +14,7 @@ RUN apt-get update \
     curl \
     build-essential \
     && curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt-get install -y nodejs && npm install -g n8n \
+    && apt-get install -y nodejs && npm install -g n8n@${N8N_VERSION} \
     && rm -rf /var/lib/apt/lists/* \
     && adduser --disabled-password --home /home/container container \
     && chown -R container:container /home/container

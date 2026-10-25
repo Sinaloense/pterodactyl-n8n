@@ -1,0 +1,58 @@
+name: Build & Push n8n
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Push n8n ${{ matrix.n8n_version }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        include:
+          - n8n_version: 2.44.6
+            tags: |
+              2.44.6
+              2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Build image
+        run: |
+          set -e
+
+          TAG_ARGS=""
+
+          while IFS= read -r tag; do
+            tag=$(echo "$tag" | xargs)
+
+            [ -z "$tag" ] && continue
+
+            TAG_ARGS="$TAG_ARGS -t ghcr.io/sinaloense/pterodactyl-n8n:$tag"
+          done <<< "${{ matrix.tags }}"
+
+          docker build \
+            --platform linux/amd64 \
+            --build-arg N8N_VERSION="${{ matrix.n8n_version }}" \
+            $TAG_ARGS \
+            .
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          while IFS= read -r tag; do
+            tag=$(echo "$tag" | xargs)
+
+            [ -z "$tag" ] && continue
+
+            docker push ghcr.io/sinaloense/pterodactyl-n8n:$tag
+          done <<< "${{ matrix.tags }}"
