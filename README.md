@@ -9,6 +9,10 @@ This repository provides what is needed to run n8n as part of a Pterodactyl serv
 - `entrypoint.sh` — Startup script.
 - `egg-n8n.json` — Egg to use in Pterodactyl.
 
+## Features
+
+- n8n version: `2.44.6`.
+
 ## Requirements
 
 - Pterodactyl installed.

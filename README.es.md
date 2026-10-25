@@ -11,7 +11,7 @@ Este repositorio provee lo necesario para correr n8n como parte de un servidor P
 
 ## Características
 
-- n8n version: `2.44.6`.
+- n8n versión: `2.44.6`.
 
 ## Requisitos:
 
