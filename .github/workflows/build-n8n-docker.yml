@@ -19,6 +19,7 @@ jobs:
             tags: |
               2.44.6
               2
+              latest
 
     steps:
       - name: Checkout
